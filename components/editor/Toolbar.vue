@@ -92,9 +92,9 @@ const sections = computed(() => [
   <div class="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
     <ToolbarButton v-for="item in sections[0]" :key="item.label" :icon="item.icon" @click="item.onClick" />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
-
+    <FontFamilyButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
-
+    <HeadingLevelButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
 
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
