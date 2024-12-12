@@ -5,6 +5,13 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/color-mode'],
   shadcn: {
     prefix: '',
-    componentDir: './components/ui'
-  }
+    componentDir: './components/ui',
+  },
+  components: [
+    '~/components',
+    {
+      path: '~/components/editor',
+      pathPrefix: false,
+    },
+  ],
 })

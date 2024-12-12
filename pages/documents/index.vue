@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <div class="p-2">
-    Hello World
-  </div>
 </template>
+
+<style scoped>
+
+</style>
