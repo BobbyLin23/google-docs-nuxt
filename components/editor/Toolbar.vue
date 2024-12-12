@@ -3,7 +3,6 @@ import {
   Bold,
   Italic,
   ListTodo,
-  type LucideIcon,
   MessageSquarePlus,
   Printer,
   Redo2,
@@ -16,27 +15,25 @@ import { useEditorStore } from '~/store/editor'
 
 const { editor } = useEditorStore()
 
-const sections: {
-  label: string
-  icon: LucideIcon
-  onClick: () => void
-  isActive?: boolean
-}[][] = [
+const sections = computed(() => [
   [
     {
       label: 'Undo',
       icon: Undo2,
       onClick: () => editor?.chain().focus().undo().run(),
+      isActive: false,
     },
     {
       label: 'Redo',
       icon: Redo2,
       onClick: () => editor?.chain().focus().redo().run(),
+      isActive: false,
     },
     {
       label: 'Print',
       icon: Printer,
       onClick: () => window.print(),
+      isActive: false,
     },
     {
       label: 'Spell Check',
@@ -45,6 +42,7 @@ const sections: {
         const current = editor?.view.dom.getAttribute('spellcheck')
         editor?.view.dom.setAttribute('spellcheck', current === 'false' ? 'true' : 'false')
       },
+      isActive: false,
     },
   ],
   [
@@ -87,7 +85,7 @@ const sections: {
       isActive: false,
     },
   ],
-]
+])
 </script>
 
 <template>
