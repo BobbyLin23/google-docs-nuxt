@@ -9,11 +9,37 @@ import TaskList from '@tiptap/extension-task-list'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import ImageResize from 'tiptap-extension-resize-image'
+import { useEditorStore } from '~/store/editor'
 
 const editor = ref<Editor>()
+const { setEditor } = useEditorStore()
 
 onMounted(() => {
   editor.value = new Editor({
+    onCreate({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onDestroy() {
+      setEditor(null)
+    },
+    onUpdate({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onSelectionUpdate({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onTransaction({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onFocus({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onBlur({ editor }) {
+      setEditor(editor as Editor)
+    },
+    onContentError({ editor }) {
+      setEditor(editor as Editor)
+    },
     editorProps: {
       attributes: {
         style: 'padding-left: 56px; padding-right: 56px',
