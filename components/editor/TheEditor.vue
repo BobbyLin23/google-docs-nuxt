@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Color } from '@tiptap/extension-color'
 import FontFamily from '@tiptap/extension-font-family'
 import Image from '@tiptap/extension-image'
 import Table from '@tiptap/extension-table'
@@ -67,6 +68,7 @@ onMounted(() => {
       Underline,
       FontFamily,
       TextStyle,
+      Color,
     ],
   })
 })
