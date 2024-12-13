@@ -52,7 +52,7 @@ const getCurrentHeading = computed(() => {
 
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child>
+    <DropdownMenuTrigger>
       <button class="flex h-7 min-h-7 shrink-0 items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm hover:bg-stone-200/80">
         <span>
           {{ getCurrentHeading }}

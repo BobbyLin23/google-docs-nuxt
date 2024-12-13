@@ -31,7 +31,7 @@ const fonts = [
 
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child>
+    <DropdownMenuTrigger>
       <button class="h-7 w-[120px] flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
         <span class="truncate">
           {{ editor?.getAttributes('textStyle').fontFamily || 'Arial' }}
