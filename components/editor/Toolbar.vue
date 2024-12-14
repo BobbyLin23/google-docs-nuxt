@@ -104,6 +104,8 @@ const sections = computed(() => [
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <LinkButton />
     <ImageButton />
+    <AlignButton />
+    <ListButton />
     <ToolbarButton v-for="item in sections[2]" :key="item.label" :icon="item.icon" :is-active="item.isActive" @click="item.onClick" />
   </div>
 </template>
