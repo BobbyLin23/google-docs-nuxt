@@ -105,6 +105,7 @@ const sections = computed(() => [
     <LinkButton />
     <ImageButton />
     <AlignButton />
+    <LineHeightButton />
     <ListButton />
     <ToolbarButton v-for="item in sections[2]" :key="item.label" :icon="item.icon" :is-active="item.isActive" @click="item.onClick" />
   </div>

@@ -16,6 +16,7 @@ import { StarterKit } from '@tiptap/starter-kit'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import ImageResize from 'tiptap-extension-resize-image'
 import { FontSizeExtension } from '~/extensions/font-size'
+import { LineHeightExtension } from '~/extensions/line-height'
 import { useEditorStore } from '~/store/editor'
 
 const editor = ref<Editor>()
@@ -81,6 +82,10 @@ onMounted(() => {
         types: ['heading', 'paragraph'],
       }),
       FontSizeExtension,
+      LineHeightExtension.configure({
+        types: ['heading', 'paragraph'],
+        defaultLineHeight: 'normal',
+      }),
     ],
   })
 })
