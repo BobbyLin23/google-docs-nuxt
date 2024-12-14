@@ -238,4 +238,13 @@
       outline: 3px solid var(--primary);
     }
   }
+
+  /* Link styles */
+  a {
+    @apply cursor-pointer text-blue-600;
+
+    &:hover {
+      @apply underline;
+    }
+  }
 }

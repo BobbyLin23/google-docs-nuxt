@@ -2,6 +2,7 @@
 import { Color } from '@tiptap/extension-color'
 import FontFamily from '@tiptap/extension-font-family'
 import Image from '@tiptap/extension-image'
+import Link from '@tiptap/extension-link'
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
@@ -69,6 +70,11 @@ onMounted(() => {
       FontFamily,
       TextStyle,
       Color,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https:',
+      }),
     ],
   })
 })

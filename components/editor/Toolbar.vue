@@ -96,12 +96,14 @@ const sections = computed(() => [
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <HeadingLevelButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
+    <!--    TODO: FontSize -->
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <ToolbarButton v-for="item in sections[1]" :key="item.label" :icon="item.icon" :is-active="item.isActive" @click="item.onClick" />
-    <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <TextColorButton />
     <HighlightColorButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
+    <LinkButton />
+    <ImageButton />
     <ToolbarButton v-for="item in sections[2]" :key="item.label" :icon="item.icon" :is-active="item.isActive" @click="item.onClick" />
   </div>
 </template>
