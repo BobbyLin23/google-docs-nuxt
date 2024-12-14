@@ -96,7 +96,7 @@ const sections = computed(() => [
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <HeadingLevelButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
-    <!--    TODO: FontSize -->
+    <FontSizeButton />
     <Separator orientation="vertical" class="h-6 bg-neutral-300" />
     <ToolbarButton v-for="item in sections[1]" :key="item.label" :icon="item.icon" :is-active="item.isActive" @click="item.onClick" />
     <TextColorButton />
