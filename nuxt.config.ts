@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
+    '@nuxt/image',
   ],
   shadcn: {
     prefix: '',
@@ -16,6 +17,10 @@ export default defineNuxtConfig({
     '~/components',
     {
       path: '~/components/editor',
+      pathPrefix: false,
+    },
+    {
+      path: '~/components/documents',
       pathPrefix: false,
     },
   ],

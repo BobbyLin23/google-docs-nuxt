@@ -1,0 +1,34 @@
+<script setup lang="ts">
+import { ArrowDown } from 'lucide-vue-next'
+
+defineProps<{
+  position: number
+  isLeft: boolean
+  isDragging: boolean
+  onMouseDown: () => void
+  onDoubleClick: () => void
+}>()
+</script>
+
+<template>
+  <div
+    class="absolute top-0 w-4 h-full cursor-ew-resize z-[5] group -ml-2"
+    :style="{
+      [isLeft ? 'left' : 'right']: `${position}px`,
+    }"
+    @mousedown="onMouseDown"
+    @dblclick="onDoubleClick"
+  >
+    <ArrowDown class="absolute left-1/2 top-0 h-full fill-blue-500 transform -translate-x-1/2" />
+    <div
+      class="absolute left-1/2 top-4 transform -translate-x-1/2 transition-opacity"
+      :style="{
+        height: '100vh',
+        width: '1px',
+        transform: 'scaleX(0.5)',
+        backgroundColor: '#3b72f6',
+        display: isDragging ? 'block' : 'none',
+      }"
+    />
+  </div>
+</template>
