@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { List, ListOrdered } from 'lucide-vue-next'
 import { cn } from '~/lib/utils'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const lists = [
   {
     label: 'Bullet List',
     icon: List,
-    isActive: () => editor?.isActive('bulletList'),
-    onClick: () => editor?.chain().focus().toggleBulletList().run(),
+    isActive: () => editor.value?.isActive('bulletList'),
+    onClick: () => editor.value?.chain().focus().toggleBulletList().run(),
   },
   {
     label: 'Ordered List',
     icon: ListOrdered,
-    isActive: () => editor?.isActive('orderedList'),
-    onClick: () => editor?.chain().focus().toggleOrderedList().run(),
+    isActive: () => editor.value?.isActive('orderedList'),
+    onClick: () => editor.value?.chain().focus().toggleOrderedList().run(),
   },
 ]
 </script>

@@ -2,9 +2,10 @@
 import type { Level } from '@tiptap/extension-heading'
 import { ChevronDown } from 'lucide-vue-next'
 import { cn } from '~/lib/utils'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const headings = [
   {
@@ -41,7 +42,7 @@ const headings = [
 
 const getCurrentHeading = computed(() => {
   for (let i = 0; i < headings.length; i++) {
-    if (editor?.isActive('heading', { level: headings[i].value })) {
+    if (editor.value?.isActive('heading', { level: headings[i].value })) {
       return headings[i].label
     }
   }

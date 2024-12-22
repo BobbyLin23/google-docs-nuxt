@@ -18,7 +18,7 @@ import ImageResize from 'tiptap-extension-resize-image'
 import Ruler from '~/components/editor/Ruler.vue'
 import { FontSizeExtension } from '~/extensions/font-size'
 import { LineHeightExtension } from '~/extensions/line-height'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
 const editor = ref<Editor>()
 const { setEditor } = useEditorStore()
@@ -26,7 +26,7 @@ const { setEditor } = useEditorStore()
 onMounted(() => {
   editor.value = new Editor({
     onCreate({ editor }) {
-      setEditor(editor as Editor)
+      setEditor(editor as unknown as Editor)
     },
     onDestroy() {
       setEditor(null)
@@ -68,7 +68,6 @@ onMounted(() => {
       TableRow,
       TableHeader,
       TableCell,
-      Image,
       ImageResize,
       Underline,
       FontFamily,

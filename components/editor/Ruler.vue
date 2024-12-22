@@ -62,12 +62,12 @@ function handleMouseRightDoubleClick() {
 <template>
   <div
     ref="rulerRef"
-    class="h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
+    class="w-[816px] mx-auto h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
     @mousemove="handleMouseMove"
     @mouseup="handleMouseUp"
     @mouseleave="handleMouseUp"
   >
-    <div id="ruler-container" class="max-w-[816px] mx-auto w-full h-full relative">
+    <div id="ruler-container" class="w-full h-full relative">
       <div class="absolute inset-x-0 bottom-0 h-full">
         <div class="relative h-full w-[816px]">
           <Marker

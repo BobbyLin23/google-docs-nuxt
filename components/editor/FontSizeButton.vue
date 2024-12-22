@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Minus, Plus } from 'lucide-vue-next'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
-const currentFontSize = computed(() => editor?.getAttributes('textStyle').fontSize
-  ? editor?.getAttributes('textStyle').fontSize.replace('px', '')
+const currentFontSize = computed(() => editor.value?.getAttributes('textStyle').fontSize
+  ? editor.value?.getAttributes('textStyle').fontSize.replace('px', '')
   : '16')
 
 const fontSize = ref(currentFontSize.value)
@@ -15,7 +16,7 @@ const isEditing = ref(false)
 function updateFontSize(newSize: string) {
   const size = Number.parseInt(newSize)
   if (!Number.isNaN(size) && size > 0) {
-    editor?.chain().focus().setFontSize(`${size}px`).run()
+    editor.value?.chain().focus().setFontSize(`${size}px`).run()
     fontSize.value = newSize
     inputValue.value = newSize
     isEditing.value = false
@@ -40,7 +41,7 @@ function handleKeyDown(event: KeyboardEvent) {
   if (event.key === 'Enter') {
     event.preventDefault()
     updateFontSize(inputValue.value)
-    editor?.commands.focus()
+    editor.value?.commands.focus()
   }
 }
 </script>

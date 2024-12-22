@@ -11,22 +11,25 @@ import {
   Underline,
   Undo2,
 } from 'lucide-vue-next'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const sections = computed(() => [
   [
     {
       label: 'Undo',
       icon: Undo2,
-      onClick: () => editor?.chain().focus().undo().run(),
+      onClick: () => {
+        editor.value?.chain().focus().undo().run()
+      },
       isActive: false,
     },
     {
       label: 'Redo',
       icon: Redo2,
-      onClick: () => editor?.chain().focus().redo().run(),
+      onClick: () => editor.value?.chain().focus().redo().run(),
       isActive: false,
     },
     {
@@ -39,8 +42,8 @@ const sections = computed(() => [
       label: 'Spell Check',
       icon: SpellCheck,
       onClick: () => {
-        const current = editor?.view.dom.getAttribute('spellcheck')
-        editor?.view.dom.setAttribute('spellcheck', current === 'false' ? 'true' : 'false')
+        const current = editor.value?.view.dom.getAttribute('spellcheck')
+        editor.value?.view.dom.setAttribute('spellcheck', current === 'false' ? 'true' : 'false')
       },
       isActive: false,
     },
@@ -49,20 +52,20 @@ const sections = computed(() => [
     {
       label: 'Bold',
       icon: Bold,
-      onClick: () => editor?.chain().focus().toggleBold().run(),
-      isActive: editor?.isActive('bold'),
+      onClick: () => editor.value?.chain().focus().toggleBold().run(),
+      isActive: editor.value?.isActive('bold'),
     },
     {
       label: 'Italic',
       icon: Italic,
-      onClick: () => editor?.chain().focus().toggleItalic().run(),
-      isActive: editor?.isActive('italic'),
+      onClick: () => editor.value?.chain().focus().toggleItalic().run(),
+      isActive: editor.value?.isActive('italic'),
     },
     {
       label: 'Underline',
       icon: Underline,
-      onClick: () => editor?.chain().focus().toggleUnderline().run(),
-      isActive: editor?.isActive('underline'),
+      onClick: () => editor.value?.chain().focus().toggleUnderline().run(),
+      isActive: editor.value?.isActive('underline'),
     },
   ],
   [
@@ -75,13 +78,13 @@ const sections = computed(() => [
     {
       label: 'List Todo',
       icon: ListTodo,
-      onClick: () => editor?.chain().focus().toggleTaskList().run(),
-      isActive: editor?.isActive('taskList'),
+      onClick: () => editor.value?.chain().focus().toggleTaskList().run(),
+      isActive: editor.value?.isActive('taskList'),
     },
     {
       label: 'Remove Formatting',
       icon: RemoveFormatting,
-      onClick: () => editor?.chain().focus().clearNodes().run(),
+      onClick: () => editor.value?.chain().focus().clearNodes().run(),
       isActive: false,
     },
   ],

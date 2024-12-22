@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from 'lucide-vue-next'
 import { cn } from '~/lib/utils'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const alignments = [
   {

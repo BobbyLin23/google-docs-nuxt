@@ -17,21 +17,69 @@ import {
   Underline,
   Undo2,
 } from 'lucide-vue-next'
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from '~/components/ui/menubar'
+import { useEditorStore } from '~/stores/editor'
 
 function handlePrint() {
   window.print()
+}
+
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
+
+function insertTable({ rows, cols }: { rows: number, cols: number }) {
+  editor.value?.chain().focus().insertTable({ rows, cols, withHeaderRow: false }).run()
+}
+
+function handleDownload(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function handleSaveJSON() {
+  if (!editor.value)
+    return
+
+  const content = editor.value.getJSON()
+  const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' })
+  handleDownload(blob, 'document.json')
+}
+
+function handleSaveHTML() {
+  if (!editor.value)
+    return
+
+  const content = editor.value.getHTML()
+  const blob = new Blob([content], { type: 'text/html' })
+  handleDownload(blob, 'document.html')
+}
+
+function handleSaveText() {
+  if (!editor.value)
+    return
+
+  const content = editor.value.getText()
+  const blob = new Blob([content], { type: 'text/plain' })
+  handleDownload(blob, 'document.txt')
+}
+
+function handleSavePDF() {
+  if (!editor.value)
+    return
+
+  const content = editor.value.getHTML()
+  const blob = new Blob([content], { type: 'text/html' })
+  const url = URL.createObjectURL(blob)
+  const iframe = document.createElement('iframe')
+  iframe.style.display = 'none'
+  iframe.src = url
+  document.body.appendChild(iframe)
+  iframe.contentWindow?.print()
+  document.body.removeChild(iframe)
+  URL.revokeObjectURL(url)
 }
 </script>
 
@@ -56,19 +104,19 @@ function handlePrint() {
                     Save
                   </MenubarSubTrigger>
                   <MenubarSubContent>
-                    <MenubarItem>
+                    <MenubarItem @click="handleSaveJSON">
                       <FileJson class="size-4 mr-2" />
                       JSON
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="handleSaveHTML">
                       <Globe class="size-4 mr-2" />
                       HTML
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="handleSavePDF">
                       <FileText class="size-4 mr-2" />
                       PDF
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="handleSaveText">
                       <FileText class="size-4 mr-2" />
                       Text
                     </MenubarItem>
@@ -102,14 +150,14 @@ function handlePrint() {
                 Edit
               </MenubarTrigger>
               <MenubarContent class="print:hidden">
-                <MenubarItem>
+                <MenubarItem @click="() => editor?.chain().focus().undo().run()">
                   <Undo2 class="size-4 mr-2" />
                   Undo
                   <MenubarShortcut>
                     ⌘Z
                   </MenubarShortcut>
                 </MenubarItem>
-                <MenubarItem>
+                <MenubarItem @click="() => editor?.chain().focus().redo().run()">
                   <Redo2 class="size-4 mr-2" />
                   Redo
                   <MenubarShortcut>
@@ -128,14 +176,17 @@ function handlePrint() {
                     Table
                   </MenubarSubTrigger>
                   <MenubarSubContent>
-                    <MenubarItem>
+                    <MenubarItem @click="() => insertTable({ rows: 1, cols: 1 })">
                       1 x 1
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="() => insertTable({ rows: 2, cols: 2 })">
                       2 x 2
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="() => insertTable({ rows: 3, cols: 3 })">
                       3 x 3
+                    </MenubarItem>
+                    <MenubarItem @click="() => insertTable({ rows: 4, cols: 4 })">
+                      4 x 4
                     </MenubarItem>
                   </MenubarSubContent>
                 </MenubarSub>
@@ -152,28 +203,28 @@ function handlePrint() {
                     Text
                   </MenubarSubTrigger>
                   <MenubarSubContent>
-                    <MenubarItem>
+                    <MenubarItem @click="() => editor?.chain().focus().toggleBold().run()">
                       <Bold class="size-4 mr-2" />
                       Bold
                       <MenubarShortcut>
                         ⌘B
                       </MenubarShortcut>
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="() => editor?.chain().focus().toggleItalic().run()">
                       <Italic class="size-4 mr-2" />
                       Italic
                       <MenubarShortcut>
                         ⌘I
                       </MenubarShortcut>
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="() => editor?.chain().focus().toggleUnderline().run()">
                       <Underline class="size-4 mr-2" />
                       Underline
                       <MenubarShortcut>
                         ⌘U
                       </MenubarShortcut>
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem @click="() => editor?.chain().focus().toggleStrike().run()">
                       <Strikethrough class="size-4 mr-2" />
                       Strikethrough&nbsp;
                       <MenubarShortcut>
@@ -182,7 +233,7 @@ function handlePrint() {
                     </MenubarItem>
                   </MenubarSubContent>
                 </MenubarSub>
-                <MenubarItem>
+                <MenubarItem @click="() => editor?.chain().focus().unsetAllMarks().run()">
                   <RemoveFormatting class="size-4 mr-2" />
                   Clear formatting
                 </MenubarItem>

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { Link2 } from 'lucide-vue-next'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
-const value = ref(editor?.getAttributes('link').href || '')
+const value = ref(editor.value?.getAttributes('link').href || '')
 
 function onChange(href: string) {
-  editor?.chain().focus().extendMarkRange('link').setLink({ href }).run()
+  editor.value?.chain().focus().extendMarkRange('link').setLink({ href }).run()
   value.value = ''
 }
 </script>

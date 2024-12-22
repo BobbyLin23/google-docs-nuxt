@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { Image, Search, Upload } from 'lucide-vue-next'
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const isDialogOpen = ref(false)
 const imageUrl = ref('')
 
 function onChange(src: string) {
-  editor?.chain().focus().setImage({ src }).run()
+  editor.value?.chain().focus().setImage({ src }).run()
 }
 
 function onUpload() {

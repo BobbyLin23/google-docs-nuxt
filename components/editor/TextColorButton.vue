@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { useEditorStore } from '~/store/editor'
+import { useEditorStore } from '~/stores/editor'
 
-const { editor } = useEditorStore()
+const editorStore = useEditorStore()
+const { editor } = storeToRefs(editorStore)
 
 const value = computed(() => {
-  return editor?.getAttributes('textStyle').color || '#000000'
+  return editor.value?.getAttributes('textStyle').color || '#000000'
 })
 </script>
 
