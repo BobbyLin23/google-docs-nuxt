@@ -6,6 +6,7 @@ export const useEditorStore = defineStore('editor', () => {
   const setEditor = (value: Editor | null) => {
     editor.value = value
   }
+
   return {
     editor,
     setEditor,

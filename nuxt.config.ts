@@ -11,6 +11,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     '@nuxt/image',
+    '@nuxt/fonts',
+    '@vueuse/nuxt',
   ],
   shadcn: {
     prefix: '',
@@ -25,6 +27,10 @@ export default defineNuxtConfig({
     {
       path: '~/components/documents',
       pathPrefix: false,
+    },
+    {
+      path: '~/components/home',
+      prefix: 'Home',
     },
   ],
   pinia: {
