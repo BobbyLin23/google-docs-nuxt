@@ -8,7 +8,7 @@
       <HomeNavbar />
     </div>
     <div class="mt-16">
-      Hello World
+      <HomeTemplateGallery />
     </div>
   </div>
 </template>
