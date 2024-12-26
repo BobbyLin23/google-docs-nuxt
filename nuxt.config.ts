@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/fonts',
     '@vueuse/nuxt',
+    '@nuxtjs/supabase',
   ],
   shadcn: {
     prefix: '',
@@ -35,5 +36,8 @@ export default defineNuxtConfig({
   ],
   pinia: {
     storesDirs: ['~/stores/**'],
+  },
+  supabase: {
+    redirect: false,
   },
 })
